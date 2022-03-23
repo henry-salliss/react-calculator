@@ -1,6 +1,7 @@
 import Backdrop from "./UI/Backdrop";
-import CalcButton from "./UI/CalcButton";
+import CalcButton from "./CalcButton";
 import styles from "./Calculator.module.css";
+import Screen from "./Screen";
 
 const symbols = [
   "%",
@@ -31,9 +32,10 @@ const Calculator = () => {
   });
 
   return (
-    <Backdrop>
-      <div className={styles.calculator}>{buttons}</div>
-    </Backdrop>
+    <div className={styles.calculator}>
+      <Screen />
+      {buttons}
+    </div>
   );
 };
 

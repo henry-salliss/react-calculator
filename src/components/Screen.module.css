@@ -1,0 +1,8 @@
+.screen {
+  width: 200px;
+  margin: auto;
+  padding: 5%;
+  border: 2px gray solid;
+  background-color: white;
+  text-align: right;
+}
