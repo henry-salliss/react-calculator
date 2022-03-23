@@ -1,34 +1,26 @@
-import Backdrop from "./UI/Backdrop";
 import CalcButton from "./CalcButton";
 import styles from "./Calculator.module.css";
 import Screen from "./Screen";
 
-const symbols = [
-  "%",
-  "CE",
-  "C",
-  "⌫",
-  7,
-  8,
-  9,
-  "÷",
-  4,
-  5,
-  6,
-  "x",
-  1,
-  2,
-  3,
-  "-",
-  "+",
-  0,
-  ".",
-  "=",
-];
+import { useDispatch } from "react-redux";
+import { totalActions } from "../store/total-slice";
+import { symbols } from "../helpers/helpers";
 
 const Calculator = () => {
-  const buttons = symbols.map((sym) => {
-    return <CalcButton>{sym}</CalcButton>;
+  const dispatch = useDispatch();
+
+  const buttonClickHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(totalActions.add());
+  };
+
+  const buttons = symbols.map((sym, i) => {
+    return (
+      <CalcButton value={sym} key={i} onClick={buttonClickHandler}>
+        {sym}
+      </CalcButton>
+    );
   });
 
   return (
