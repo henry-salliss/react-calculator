@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { total: 0, currentValue: null };
+const initialTotalState = { total: 0, currentValue: 0 };
 
 const totalSlice = createSlice({
   name: "total",
-  initialState: initialState,
+  initialState: initialTotalState,
   reducers: {
-    add(state) {
-      console.log(state);
+    setValue(state, action) {
+      state.currentValue = action.payload;
     },
   },
 });

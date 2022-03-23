@@ -4,7 +4,7 @@ import Screen from "./Screen";
 
 import { useDispatch } from "react-redux";
 import { totalActions } from "../store/total-slice";
-import { symbols } from "../helpers/helpers";
+import { symbols, nonNumSymbols } from "../helpers/helpers";
 
 const Calculator = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,11 @@ const Calculator = () => {
   const buttonClickHandler = (e) => {
     e.preventDefault();
 
-    dispatch(totalActions.add());
+    if (!nonNumSymbols.includes(e.target.value)) {
+      dispatch(totalActions.setValue(+e.target.value));
+    } else {
+      dispatch(totalActions.setValue(e.target.value));
+    }
   };
 
   const buttons = symbols.map((sym, i) => {

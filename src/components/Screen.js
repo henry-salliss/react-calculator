@@ -1,7 +1,12 @@
 import styles from "./Screen.module.css";
+import { useSelector } from "react-redux";
 
 const Screen = () => {
-  return <div className={styles.screen}>0</div>;
+  const currentValue = useSelector((state) => {
+    return state.currentValue;
+  });
+  console.log(currentValue);
+  return <div className={styles.screen}>{currentValue}</div>;
 };
 
 export default Screen;

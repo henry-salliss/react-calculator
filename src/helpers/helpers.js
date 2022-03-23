@@ -20,3 +20,5 @@ export const symbols = [
   ".",
   "=",
 ];
+
+export const nonNumSymbols = ["%", "CE", "C", "⌫", "x", "+", "-", ".", "="];
