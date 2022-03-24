@@ -12,10 +12,11 @@ const Calculator = () => {
   const buttonClickHandler = (e) => {
     e.preventDefault();
 
+    // if value is a number
     if (!nonNumSymbols.includes(e.target.value)) {
       dispatch(totalActions.setValue(+e.target.value));
     } else {
-      dispatch(totalActions.setValue(e.target.value));
+      dispatch(totalActions.setSymbol(e.target.value));
     }
   };
 
