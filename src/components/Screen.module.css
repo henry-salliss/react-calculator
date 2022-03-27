@@ -13,6 +13,12 @@
   justify-content: space-between;
 }
 
+.bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .symbolText {
   font-size: 12px;
   margin: 0;

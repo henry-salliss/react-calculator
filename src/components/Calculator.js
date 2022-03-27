@@ -4,7 +4,7 @@ import Screen from "./Screen";
 
 import { useDispatch } from "react-redux";
 import { totalActions } from "../store/total-slice";
-import { symbols, nonNumSymbols } from "../helpers/helpers";
+import { symbols, nonNumSymbols, functionSymbols } from "../helpers/helpers";
 
 const Calculator = () => {
   const dispatch = useDispatch();
@@ -13,10 +13,20 @@ const Calculator = () => {
     e.preventDefault();
 
     // if value is a number
-    if (!nonNumSymbols.includes(e.target.value)) {
+    if (
+      !nonNumSymbols.includes(e.target.value) &&
+      !functionSymbols.includes(e.target.value)
+    ) {
       dispatch(totalActions.setValue(+e.target.value));
-    } else {
+    }
+    // if value is + - / * %
+    if (nonNumSymbols.includes(e.target.value)) {
       dispatch(totalActions.setSymbol(e.target.value));
+    }
+
+    // if value is = . C CE ⌫
+    if (functionSymbols.includes(e.target.value)) {
+      dispatch(totalActions.setFuncSymbol(e.target.value));
     }
   };
 

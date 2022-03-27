@@ -11,18 +11,17 @@ const Screen = () => {
 
   const secondValue = useSelector((state) => state.secondValue);
 
-  console.log(initialValue, secondValue, currentValue, currentSymbol);
+  const total = useSelector((state) => state.total);
 
-  const calculation =
-    initialValue && currentSymbol && secondValue === null
-      ? 0
-      : initialValue != null && currentSymbol === null && secondValue === null
-      ? initialValue
-      : initialValue && currentSymbol != null && secondValue === null
-      ? initialValue + " " + currentSymbol
-      : initialValue && currentSymbol && secondValue != null
-      ? initialValue + " " + currentSymbol + " " + secondValue
-      : "";
+  const funcSymbol = useSelector((state) => state.funcSymbol);
+
+  const calculationFinished = useSelector((state) => state.calculationFinished);
+
+  console.log(initialValue, currentSymbol, secondValue, total, funcSymbol);
+
+  const calculation = `${initialValue ? initialValue : ""} ${
+    currentSymbol ? currentSymbol : ""
+  } ${secondValue ? secondValue : ""}`;
 
   return (
     <div className={styles.screen}>
@@ -36,9 +35,12 @@ const Screen = () => {
           {currentSymbol === null ? "_" : currentSymbol}
         </p>
       </div>
-      <p className={styles.valueText}>
-        {currentValue === null ? 0 : currentValue}
-      </p>
+      <div className={styles.bottomRow}>
+        <p className={styles.symbolText}>{calculationFinished ? total : ""}</p>
+        <p className={styles.valueText}>
+          {currentValue === null ? 0 : currentValue}
+        </p>
+      </div>
     </div>
   );
 };
