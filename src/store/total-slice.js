@@ -110,7 +110,6 @@ const totalSlice = createSlice({
       state.calculationFinished = true;
     },
     backspace(state) {
-      console.log(state.secondValue);
       if (state.secondValue) {
         state.secondValue = state.secondValue.slice(0, -1);
         state.secondValue === "" ? (state.secondValue = null) : console.log();
