@@ -49,7 +49,6 @@ const totalSlice = createSlice({
     },
     setFuncSymbol(state, action) {
       state.funcSymbol = action.payload;
-      console.log(action.payload);
 
       if (action.payload === "CE" && state.initialValue && !state.secondValue) {
         state.initialValue = null;
@@ -69,6 +68,8 @@ const totalSlice = createSlice({
         ? totalSlice.caseReducers.divide(state)
         : action.payload === "=" && state.symbol === "x"
         ? totalSlice.caseReducers.multiply(state)
+        : action.payload === "⌫"
+        ? totalSlice.caseReducers.backspace(state)
         : console.log("");
     },
     clearCalc(state) {
@@ -107,6 +108,22 @@ const totalSlice = createSlice({
       state.total = state.total.toLocaleString();
       state.squared = true;
       state.calculationFinished = true;
+    },
+    backspace(state) {
+      console.log(state.secondValue);
+      if (state.secondValue) {
+        state.secondValue = state.secondValue.slice(0, -1);
+        state.secondValue === "" ? (state.secondValue = null) : console.log();
+        return;
+      }
+      if (state.initialValue && state.symbol && !state.secondValue) {
+        state.symbol = null;
+        return;
+      }
+      if (state.initialValue && !state.symbol) {
+        state.initialValue = state.initialValue.slice(0, -1);
+        state.initialValue === "" ? (state.initialValue = null) : console.log();
+      }
     },
   },
 });
