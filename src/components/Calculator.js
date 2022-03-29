@@ -2,12 +2,13 @@ import CalcButton from "./CalcButton";
 import styles from "./Calculator.module.css";
 import Screen from "./Screen";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { totalActions } from "../store/total-slice";
 import { symbols, nonNumSymbols, functionSymbols } from "../helpers/helpers";
 
 const Calculator = () => {
   const dispatch = useDispatch();
+  const squared = useSelector((state) => state.squared);
 
   const buttonClickHandler = (e) => {
     e.preventDefault();
@@ -15,9 +16,18 @@ const Calculator = () => {
     // if value is a number
     if (
       !nonNumSymbols.includes(e.target.value) &&
-      !functionSymbols.includes(e.target.value)
+      !functionSymbols.includes(e.target.value) &&
+      !squared
     ) {
-      dispatch(totalActions.setValue(+e.target.value));
+      dispatch(totalActions.setValue(e.target.value));
+    }
+    if (
+      !nonNumSymbols.includes(e.target.value) &&
+      !functionSymbols.includes(e.target.value) &&
+      squared
+    ) {
+      dispatch(totalActions.clearCalc());
+      dispatch(totalActions.setValue(e.target.value));
     }
     // if value is + - / * %
     if (nonNumSymbols.includes(e.target.value)) {

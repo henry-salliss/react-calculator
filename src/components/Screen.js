@@ -19,7 +19,7 @@ const Screen = () => {
 
   console.log(initialValue, currentSymbol, secondValue, total, funcSymbol);
 
-  const calculation = `${initialValue ? initialValue : ""} ${
+  const calculation = `${initialValue ? initialValue.toLocaleString() : ""} ${
     currentSymbol ? currentSymbol : ""
   } ${secondValue ? secondValue : ""}`;
 

@@ -8,6 +8,7 @@ const initialTotalState = {
   symbol: null,
   funcSymbol: null,
   calculationFinished: false,
+  squared: false,
 };
 
 const totalSlice = createSlice({
@@ -39,9 +40,24 @@ const totalSlice = createSlice({
     },
     setSymbol(state, action) {
       state.symbol = action.payload;
+
+      if (action.payload === "x²") {
+        totalSlice.caseReducers.square(state);
+        state.squared = true;
+      }
+      if (state.funcSymbol === "CE") console.log("ce");
     },
     setFuncSymbol(state, action) {
       state.funcSymbol = action.payload;
+      console.log(action.payload);
+
+      if (action.payload === "CE" && state.initialValue && !state.secondValue) {
+        state.initialValue = null;
+        state.symbol = null;
+      }
+      if (action.payload === "CE" && state.initialValue && state.secondValue) {
+        state.secondValue = null;
+      }
 
       action.payload === "C"
         ? totalSlice.caseReducers.clearCalc(state)
@@ -63,21 +79,33 @@ const totalSlice = createSlice({
       state.symbol = null;
       state.funcSymbol = null;
       state.calculationFinished = false;
+      state.squared = false;
     },
     add(state) {
       state.total = +state.initialValue + +state.secondValue;
+      state.total = state.total.toLocaleString();
       state.calculationFinished = true;
     },
     subtract(state) {
       state.total = +state.initialValue - +state.secondValue;
+      state.total = state.total.toLocaleString();
       state.calculationFinished = true;
     },
     divide(state) {
       state.total = +state.initialValue / +state.secondValue;
+      state.total = state.total.toLocaleString();
       state.calculationFinished = true;
     },
     multiply(state) {
       state.total = +state.initialValue * +state.secondValue;
+      state.total = state.total.toLocaleString();
+      state.calculationFinished = true;
+    },
+    square(state) {
+      console.log("runs");
+      state.total = +state.initialValue * state.initialValue;
+      state.total = state.total.toLocaleString();
+      state.squared = true;
       state.calculationFinished = true;
     },
   },

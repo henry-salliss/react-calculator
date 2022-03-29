@@ -1,5 +1,5 @@
 export const symbols = [
-  "%",
+  "x²",
   "CE",
   "C",
   "⌫",
@@ -21,6 +21,6 @@ export const symbols = [
   "=",
 ];
 
-export const nonNumSymbols = ["%", "x", "+", "-", "÷"];
+export const nonNumSymbols = ["x²", "x", "+", "-", "÷"];
 
 export const functionSymbols = ["=", ".", "⌫", "CE", "C"];
